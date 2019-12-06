@@ -8,7 +8,7 @@
 		],
 		"sourceMap": true,
 		"rootDir": "src",
-		"strict": true   /* enable all strict type-checking options */
+		"strict": true /* enable all strict type-checking options */
 		/* Additional Checks */
 		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
@@ -17,5 +17,17 @@
 	"exclude": [
 		"node_modules",
 		".vscode-test"
-	]
+	],
+	"typedocOptions": {
+		"name": "RSS-Reader Documentation",
+		"mode": "file",
+		"out": "docs",
+		"theme": "default",
+		"hideGenerator": true,
+		"exclude": [
+			"**/test/**/*"
+		],
+		"gaID": "UA-148189416-1",
+		"gitRevision": "master"
+	}
 }
