@@ -1,23 +1,54 @@
 {
 	"name": "rss-reader",
-	"displayName": "RSS Reader",
-	"description": "Add a RSS feed widget to VSCode",
+	"displayName": "RSS-Reader",
+	"description": "RSS feed widget",
 	"version": "0.0.1",
+	"publisher": "ekarbe",
+	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.40.0"
+	},
+	"bugs": {
+		"url": "https://github.com/ekarbe/rss-reader/issues",
+		"email": "eichkarbe@yahoo.de"
+	},
+	"homepage": "https://ekarbe.github.io/rss-reader",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ekarbe/rss-reader.git"
 	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"rss",
+		"news",
+		"browse",
+		"feed",
+		"widget"
+	],
+	"galleryBanner": {
+		"color": "#EE8030",
+		"theme": "dark"
+	},
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "RSSReader.Open",
+				"title": "Open links from RSS Reader"
+			},
+			{
+				"command": "RSSReader.Refresh",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
 			}
 		],
 		"viewsContainers": {
@@ -34,6 +65,19 @@
 				{
 					"id": "RSS-1",
 					"name": "RSS-1"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "RSSReader.Refresh",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "RSSReader.Open"
 				}
 			]
 		}
