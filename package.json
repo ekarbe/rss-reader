@@ -35,6 +35,7 @@
 	"activationEvents": [
 		"*"
 	],
+	"icon": "resources/rss-reader-icon.png",
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
