@@ -22,7 +22,7 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
             tooltip: element.title,
             collapsibleState: vscode.TreeItemCollapsibleState.None,
             command: {
-                command: 'RSS.OpenArticle',
+                command: 'RSSReader.Open',
                 title: '',
                 arguments: [element.link]
             }
@@ -31,7 +31,7 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
 
     getChildren(element?: any): Promise<Array<reader.IEntry>> {
         return new Promise<any>((resolve, reject) => {
-            reader.XML("https://heise.de/rss/heise-atom.xml")
+            reader.XML("http://feeds.bbci.co.uk/news/world/rss.xml")
                 .then(response => {
                     resolve(response.entries);
                 });
