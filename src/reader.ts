@@ -1,16 +1,16 @@
 import * as hm from 'typed-rest-client/HttpClient';
+import * as parser from 'fast-xml-parser';
 
 const http: hm.HttpClient = new hm.HttpClient('XML');
 
 export interface IFeed {
-    title: string;
-    entries: Array<IEntry>;
+    title?: string;
+    entries?: Array<IEntry>;
 }
 
 export interface IEntry {
     title: string;
-    link: string;
-    summary: string;
+    link?: string;
     date?: Date;
 }
 
@@ -29,175 +29,60 @@ export async function XML(URL: string): Promise<IFeed> {
 
 //USE DOMPARSER U DUMBASS
 
-function parseXML(XML: string): IFeed {
-    if (XML.match(/\<feed xmlns=\"http:\/\/www\.w3\.org\/2005\/Atom\"/g)) {
-        let items = XML.split('<entry>');
-        let feed: IFeed = {
-            title: "",
-            entries: [],
-        };
-        let titleArr = items[0].split('</title>');
-        let re: RegExp = RegExp("<title.*>(.*)", "gm");
-        let title = re.exec(titleArr[0]);
-        if (title) {
-            feed.title = title[1];
+function parseXML(XML: string): IFeed | undefined {
+    let JSON = parser.parse(XML);
+    let feed = undefined;
+    let feedObject: IFeed = {
+        entries: []
+    };
+    if (JSON.rss) {
+        if (JSON.rss.channel) {
+            feed = JSON.rss.channel;
+        } else if (JSON.rss.feed) {
+            feed = JSON.rss.feed;
         }
-        items.splice(0, 1);
-        items.forEach(element => {
-            let entry: IEntry = {
-                title: "",
-                link: "",
-                summary: ""
-            };
-            re = RegExp("<title.*>(.*)(?=<\/title>)", "gm");
-            title = re.exec(element);
-            if (title) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(title[1])) {
-                    title = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(title[1]);
-                }
-                if (title) {
-                    entry.title = title[1];
-                }
-            }
-            re = RegExp('<link href="(.*)(?="\/>)', "gm");
-            let link = re.exec(element);
-            if (link) {
-                entry.link = link[1];
-            }
-            re = RegExp("<summary.*>(.*)(?=<\/summary>)", "gm");
-            let summary = re.exec(element);
-            if (summary) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(summary[1])) {
-                    summary = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(summary[1]);
-                }
-                if (summary) {
-                    entry.summary = summary[1];
-                }
-            }
-            re = RegExp("<updated.*>(.*)(?=<\/updated>)", "gm");
-            let date = re.exec(element);
-            if (date) {
-                entry.date = new Date(date[1]);
-            } else {
-                re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
-                let date = re.exec(element);
-                if (date) {
-                    entry.date = new Date(date[1]);
-                }
-            }
-            feed.entries.push(entry);
-        });
-        return feed;
-    } else if (XML.match(/<rss version="2\.0"/g)) {
-        let items = XML.split('<item>');
-        let feed: IFeed = {
-            title: "",
-            entries: [],
-        };
-        let titleArr = items[0].split('</title>');
-        let re: RegExp = RegExp("<title>(.*)", "gm");
-        let title = re.exec(titleArr[0]);
-        if (title) {
-            feed.title = title[1];
+    } else if (JSON.channel) {
+        feed = JSON.channel;
+    } else if (JSON.feed) {
+        feed = JSON.feed;
+    }
+    if (feed) {
+        if (feed.title) {
+            feedObject.title = feed.title;
         }
-        items.splice(0, 1);
-        items.forEach(element => {
-            let entry: IEntry = {
-                title: "",
-                link: "",
-                summary: "",
-            };
-            re = RegExp("<title>(.*)(?=<\/title>)", "gm");
-            title = re.exec(element);
-            if (title) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(title[1])) {
-                    title = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(title[1]);
+        let items = undefined;
+        if (feed.item) {
+            items = feed.item;
+        } else if (feed.entry) {
+            items = feed.entry;
+        }
+        if (items) {
+            items.forEach((object: any) => {
+                let entry: IEntry = {
+                    title: ""
+                };
+                if(object.title){
+                    entry.title = object.title;
                 }
-                if (title) {
-                    entry.title = title[1];
+                if(object.updated){
+                    entry.date = object.updated;
+                } else if(object.pubDate) {
+                    entry.date = object.pubDate;
                 }
-            }
-            re = RegExp("<link>(.*)(?=<\/link>)", "gm");
-            let link = re.exec(element);
-            if (link) {
-                entry.link = link[1];
-            }
-            re = RegExp("<description>(.*)(?=<\/description>)", "gm");
-            let summary = re.exec(element);
-            if (summary) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(summary[1])) {
-                    summary = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(summary[1]);
+                if(object.link){
+                    entry.link = object.link;
+                } else if(object.source){
+                    entry.link = object.source;
+                } // else regex for link other content
+                if (entry && feedObject.entries) {
+                    feedObject.entries.push(entry);
                 }
-                if (summary) {
-                    entry.summary = summary[1];
-                }
-            }
-            re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
-            let date = re.exec(element);
-            if (date) {
-                entry.date = new Date(date[1]);
-            }
-            feed.entries.push(entry);
-        });
-        return feed;
+            });
+            return feedObject;
+        } else {
+            // not items error
+        }
     } else {
-        let items = XML.split('<item>');
-        let feed: IFeed = {
-            title: "",
-            entries: [],
-        };
-        let titleArr = items[0].split('</title>');
-        let re: RegExp = RegExp("<title>(.*)", "gm");
-        let title = re.exec(titleArr[0]);
-        if (title) {
-            feed.title = title[1];
-        }
-        items.splice(0, 1);
-        items.forEach(element => {
-            let entry: IEntry = {
-                title: "",
-                link: "",
-                summary: "",
-            };
-            re = RegExp("<title>(.*)(?=<\/title>)", "gm");
-            title = re.exec(element);
-            if (title) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(title[1])) {
-                    title = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(title[1]);
-                }
-                if (title) {
-                    entry.title = title[1];
-                }
-            }
-            re = RegExp('<link>(.*)(?=<\/link>)', "gm");
-            let link = re.exec(element);
-            if (link) {
-                entry.link = link[1];
-            }
-            if (!entry.link) {
-                re = RegExp('<source url="(.*)(?=">)', "gm");
-                let link = re.exec(element);
-                if (link) {
-                    entry.link = link[1];
-                }
-            }
-            re = RegExp("<description>(.*)(?=<\/description>)", "gm");
-            let summary = re.exec(element);
-            if (summary) {
-                if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(summary[1])) {
-                    summary = /<!\[CDATA\[(.*)(?=\]\]>)/gm.exec(summary[1]);
-                }
-                if (summary) {
-                    entry.summary = summary[1];
-                }
-            }
-            re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
-            let date = re.exec(element);
-            if (date) {
-                entry.date = new Date(date[1]);
-            }
-            feed.entries.push(entry);
-        });
-        return feed;
+        // no feed error
     }
 }
