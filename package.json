@@ -38,6 +38,28 @@
 	"icon": "resources/rss-reader-icon.png",
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": [
+			{
+				"title": "RSSReader",
+				"properties": {
+					"RSSReader.Feeds": {
+						"type": "array",
+						"default": [
+							{
+								"title": "Google News",
+								"url": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US%3Aen&x=1571747254.2933"
+							}
+						],
+						"description": "Sets the feeds"
+					},
+					"RSSReader.Consolidated": {
+						"type": "boolean",
+						"default": true,
+						"description": "Defines if the feeds should be consolidated into one view."
+					}
+				}
+			}
+		],
 		"commands": [
 			{
 				"command": "RSSReader.Open",
@@ -64,8 +86,44 @@
 		"views": {
 			"RSS": [
 				{
+					"id": "RSS-0",
+					"name": "RSS-0"
+				},
+				{
 					"id": "RSS-1",
 					"name": "RSS-1"
+				},
+				{
+					"id": "RSS-2",
+					"name": "RSS-2"
+				},
+				{
+					"id": "RSS-3",
+					"name": "RSS-3"
+				},
+				{
+					"id": "RSS-4",
+					"name": "RSS-4"
+				},
+				{
+					"id": "RSS-5",
+					"name": "RSS-5"
+				},
+				{
+					"id": "RSS-6",
+					"name": "RSS-6"
+				},
+				{
+					"id": "RSS-7",
+					"name": "RSS-7"
+				},
+				{
+					"id": "RSS-8",
+					"name": "RSS-8"
+				},
+				{
+					"id": "RSS-9",
+					"name": "RSS-9"
 				}
 			]
 		},

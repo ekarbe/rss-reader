@@ -11,6 +11,7 @@ export interface IEntry {
     title: string;
     link: string;
     summary: string;
+    date?: Date;
 }
 
 export async function XML(URL: string): Promise<IFeed> {
@@ -46,7 +47,7 @@ function parseXML(XML: string): IFeed {
             let entry: IEntry = {
                 title: "",
                 link: "",
-                summary: "",
+                summary: ""
             };
             re = RegExp("<title.*>(.*)(?=<\/title>)", "gm");
             title = re.exec(element);
@@ -73,6 +74,17 @@ function parseXML(XML: string): IFeed {
                     entry.summary = summary[1];
                 }
             }
+            re = RegExp("<updated.*>(.*)(?=<\/updated>)", "gm");
+            let date = re.exec(element);
+            if (date) {
+                entry.date = new Date(date[1]);
+            } else {
+                re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
+                let date = re.exec(element);
+                if (date) {
+                    entry.date = new Date(date[1]);
+                }
+            }
             feed.entries.push(entry);
         });
         return feed;
@@ -96,7 +108,6 @@ function parseXML(XML: string): IFeed {
                 summary: "",
             };
             re = RegExp("<title>(.*)(?=<\/title>)", "gm");
-            console.log(element);
             title = re.exec(element);
             if (title) {
                 if (/<!\[CDATA\[(.*)(?=\]\]>)/gm.test(title[1])) {
@@ -120,6 +131,11 @@ function parseXML(XML: string): IFeed {
                 if (summary) {
                     entry.summary = summary[1];
                 }
+            }
+            re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
+            let date = re.exec(element);
+            if (date) {
+                entry.date = new Date(date[1]);
             }
             feed.entries.push(entry);
         });
@@ -174,6 +190,11 @@ function parseXML(XML: string): IFeed {
                 if (summary) {
                     entry.summary = summary[1];
                 }
+            }
+            re = RegExp("<pubDate.*>(.*)(?=<\/pubDate>)", "gm");
+            let date = re.exec(element);
+            if (date) {
+                entry.date = new Date(date[1]);
             }
             feed.entries.push(entry);
         });

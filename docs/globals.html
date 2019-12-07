@@ -71,6 +71,7 @@
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/article.html" class="tsd-kind-icon">Article</a></li>
+								<li class="tsd-kind-class"><a href="classes/rsscprovider.html" class="tsd-kind-icon">RSSCProvider</a></li>
 								<li class="tsd-kind-class"><a href="classes/rssprovider.html" class="tsd-kind-icon">RSSProvider</a></li>
 							</ul>
 						</section>
@@ -79,6 +80,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface"><a href="interfaces/ientry.html" class="tsd-kind-icon">IEntry</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/ifeed.html" class="tsd-kind-icon">IFeed</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/ifeedconfig.html" class="tsd-kind-icon">IFeed<wbr>Config</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
@@ -124,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L16">reader.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L17">reader.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,17 +143,20 @@
 					<a name="activate" class="tsd-anchor"></a>
 					<h3>activate</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">activate<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtensionContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">activate<span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ExtensionContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L4">extension.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L9">extension.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>this: <span class="tsd-signature-type">any</span></h5>
+								</li>
 								<li>
 									<h5>context: <span class="tsd-signature-type">ExtensionContext</span></h5>
 								</li>
@@ -170,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L16">extension.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L35">extension.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -187,7 +192,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L31">reader.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L32">reader.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -216,6 +221,9 @@
 						<a href="classes/article.html" class="tsd-kind-icon">Article</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/rsscprovider.html" class="tsd-kind-icon">RSSCProvider</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/rssprovider.html" class="tsd-kind-icon">RSSProvider</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -223,6 +231,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/ifeed.html" class="tsd-kind-icon">IFeed</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ifeedconfig.html" class="tsd-kind-icon">IFeed<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#http" class="tsd-kind-icon">http</a>
