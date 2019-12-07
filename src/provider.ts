@@ -12,6 +12,7 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
     constructor(feedConfig: IFeedConfig) {
         this.title = feedConfig.title;
         this.url = feedConfig.url;
+        vscode.commands.executeCommand('setContext', `RSS-${feedConfig.id}-enabled`, true);
     }
 
     refresh(): void {
@@ -19,16 +20,12 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
     }
 
     getTreeItem(element: reader.IEntry): vscode.TreeItem {
-        return {
-            label: element.title,
-            tooltip: element.title,
-            collapsibleState: vscode.TreeItemCollapsibleState.None,
-            command: {
-                command: 'RSSReader.Open',
-                title: '',
-                arguments: [element.link]
-            }
-        };
+        return new Article(element.title, vscode.TreeItemCollapsibleState.Collapsed, element.summary, {
+            command: 'RSSReader.Open',
+            title: '',
+            arguments: [element.link]
+        }
+        );
     }
 
     getChildren(element?: any): Promise<Array<reader.IEntry>> {
@@ -52,6 +49,7 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
 
     constructor(feeds: Array<IFeedConfig>) {
         this.feeds = feeds;
+        vscode.commands.executeCommand('setContext', `RSS-0-enabled`, true);
     }
 
     refresh(): void {
@@ -59,41 +57,43 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
     }
 
     getTreeItem(element: reader.IEntry): vscode.TreeItem {
-        return {
-            label: element.title,
-            tooltip: element.title,
-            collapsibleState: vscode.TreeItemCollapsibleState.None,
-            command: {
-                command: 'RSSReader.Open',
-                title: '',
-                arguments: [element.link]
-            }
-        };
+        return new Article(element.title, vscode.TreeItemCollapsibleState.Collapsed, element.summary, {
+            command: 'RSSReader.Open',
+            title: '',
+            arguments: [element.link]
+        }
+        );
     }
 
     getChildren(element?: any): Promise<Array<reader.IEntry>> {
         return new Promise<any>((resolve, reject) => {
-            if (this.feeds) {
-                let promises: Array<Promise<any>> = [];
-                for (let i = 0; i < this.feeds.length; i++) {
-                    promises.push(reader.XML(this.feeds[i].url));
-                }
-                let entries: Array<reader.IEntry> = [];
-                Promise.all(promises)
-                    .then(responses => {
-                        for (let i = 0; i < responses.length; i++) {
-                            entries = [...entries, ...responses[i].entries];
-                        }
-                        entries.sort(function (a, b) {
-                            if (a.date && b.date) {
-                                return b.date.getTime() - a.date.getTime();
-                            } else {
-                                return 0;
+            if (element) {
+                resolve([new Article(element.title, vscode.TreeItemCollapsibleState.Collapsed, element.summary, {
+                    command: 'RSSReader.Open',
+                    title: '',
+                    arguments: [element.link]
+                })]);
+            } else if (this.feeds) {
+                    let promises: Array<Promise<any>> = [];
+                    for (let i = 0; i < this.feeds.length; i++) {
+                        promises.push(reader.XML(this.feeds[i].url));
+                    }
+                    let entries: Array<reader.IEntry> = [];
+                    Promise.all(promises)
+                        .then(responses => {
+                            for (let i = 0; i < responses.length; i++) {
+                                entries = [...entries, ...responses[i].entries];
                             }
+                            entries.sort(function (a, b) {
+                                if (a.date && b.date) {
+                                    return b.date.getTime() - a.date.getTime();
+                                } else {
+                                    return 0;
+                                }
+                            });
+                            resolve(entries);
                         });
-                        resolve(entries);
-                    });
-            }
+                }
         });
 
     }
@@ -103,8 +103,12 @@ export class Article extends vscode.TreeItem {
     constructor(
         public readonly label: string,
         public readonly collapsableState: vscode.TreeItemCollapsibleState,
+        public readonly summary: string,
         public readonly command: vscode.Command
     ) {
         super(label, collapsableState);
+    }
+    get description(): string {
+        return this.summary;
     }
 }

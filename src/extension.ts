@@ -4,6 +4,7 @@ import { RSSProvider, RSSCProvider } from './provider';
 export interface IFeedConfig {
 	title: string;
 	url: string;
+	id?: number;
 }
 
 export function activate(this: any, context: vscode.ExtensionContext) {
@@ -13,11 +14,12 @@ export function activate(this: any, context: vscode.ExtensionContext) {
 		if (vscode.workspace.getConfiguration('RSSReader').get('Consolidated')) {
 			let RSSProvider = new RSSCProvider(feeds);
 			vscode.commands.registerCommand('RSSReader.Refresh', () => RSSProvider.refresh());
-			let RSSView = vscode.window.createTreeView('RSS-0', { treeDataProvider: RSSProvider });
+			vscode.window.registerTreeDataProvider('RSS-0', RSSProvider);
 		} else {
 			for (let i = 0; i < feeds.length; i++) {
+				feeds[i].id = i;
 				this['RSSProvider' + i] = new RSSProvider(feeds[i]);
-				vscode.commands.registerCommand('RSSReader.Refresh', () => this['RSSProvider' + i].refresh());
+				//vscode.commands.registerCommand('RSSReader.Refresh', () => this['RSSProvider' + i].refresh());
 				this['RSSView' + i] = vscode.window.createTreeView('RSS-' + i, { treeDataProvider: this['RSSProvider' + i] });
 				// waiting for proposed api to hit stable
 				//this['RSSView' + i].title = feeds[i].title;

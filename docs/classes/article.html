@@ -96,12 +96,18 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#collapsiblestate" class="tsd-kind-icon">collapsible<wbr>State</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="article.html#command" class="tsd-kind-icon">command</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#contextvalue" class="tsd-kind-icon">context<wbr>Value</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#description" class="tsd-kind-icon">description</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="article.html#label" class="tsd-kind-icon">label</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#resourceuri" class="tsd-kind-icon">resource<wbr>Uri</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="article.html#summary" class="tsd-kind-icon">summary</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#tooltip" class="tsd-kind-icon">tooltip</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite"><a href="article.html#description" class="tsd-kind-icon">description</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,7 +119,7 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Article<span class="tsd-signature-symbol">(</span>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, collapsableState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItemCollapsibleState</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="article.html" class="tsd-signature-type">Article</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Article<span class="tsd-signature-symbol">(</span>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, collapsableState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItemCollapsibleState</span>, summary<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="article.html" class="tsd-signature-type">Article</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -130,6 +136,9 @@
 								</li>
 								<li>
 									<h5>collapsableState: <span class="tsd-signature-type">TreeItemCollapsibleState</span></h5>
+								</li>
+								<li>
+									<h5>summary: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5>command: <span class="tsd-signature-type">Command</span></h5>
@@ -175,7 +184,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides TreeItem.command</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L106">provider.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L107">provider.ts:107</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,23 +213,6 @@
             ]
         }
     }</code></pre><p>This will show action <code>extension.deleteFolder</code> only for items with <code>contextValue</code> is <code>folder</code>.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="description" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> description</h3>
-					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from TreeItem.description</p>
-						<ul>
-							<li>Defined in /Users/ekarbe/Projects/rss-reader/node_modules/vscode/vscode.d.ts:7337</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A human readable string which is rendered less prominent.
-							When <code>true</code>, it is derived from <a href="#TreeItem.resourceUri">resourceUri</a> and when <code>falsy</code>, it is not shown.</p>
 						</div>
 					</div>
 				</section>
@@ -288,6 +280,16 @@
 						Will be used to derive the icon from current icon theme, when <a href="#TreeItem.iconPath">iconPath</a> has <a href="#ThemeIcon">ThemeIcon</a> value.</p>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="summary" class="tsd-anchor"></a>
+					<h3>summary</h3>
+					<div class="tsd-signature tsd-kind-icon">summary<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L106">provider.ts:106</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tooltip" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> tooltip</h3>
@@ -303,6 +305,27 @@
 							<p>The tooltip text when you hover over this item.</p>
 						</div>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
+					<a name="description" class="tsd-anchor"></a>
+					<h3>description</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> description<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides TreeItem.description</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L111">provider.ts:111</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -337,9 +360,6 @@
 								<a href="article.html#contextvalue" class="tsd-kind-icon">context<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="article.html#description" class="tsd-kind-icon">description</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="article.html#iconpath" class="tsd-kind-icon">icon<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -351,8 +371,14 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="article.html#resourceuri" class="tsd-kind-icon">resource<wbr>Uri</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="article.html#summary" class="tsd-kind-icon">summary</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="article.html#tooltip" class="tsd-kind-icon">tooltip</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-overwrite">
+								<a href="article.html#description" class="tsd-kind-icon">description</a>
 							</li>
 						</ul>
 					</li>

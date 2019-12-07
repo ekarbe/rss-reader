@@ -78,7 +78,7 @@
 			"activitybar": [
 				{
 					"id": "RSS",
-					"title": "RSS",
+					"title": "RSS-Reader",
 					"icon": "resources/icons/treeView.svg"
 				}
 			]
@@ -87,43 +87,53 @@
 			"RSS": [
 				{
 					"id": "RSS-0",
-					"name": "RSS-0"
+					"name": "RSS-0",
+					"when": "RSS-0-enabled"
 				},
 				{
 					"id": "RSS-1",
-					"name": "RSS-1"
+					"name": "RSS-1",
+					"when": "RSS-1-enabled"
 				},
 				{
 					"id": "RSS-2",
-					"name": "RSS-2"
+					"name": "RSS-2",
+					"when": "RSS-2-enabled"
 				},
 				{
 					"id": "RSS-3",
-					"name": "RSS-3"
+					"name": "RSS-3",
+					"when": "RSS-3-enabled"
 				},
 				{
 					"id": "RSS-4",
-					"name": "RSS-4"
+					"name": "RSS-4",
+					"when": "RSS-4-enabled"
 				},
 				{
 					"id": "RSS-5",
-					"name": "RSS-5"
+					"name": "RSS-5",
+					"when": "RSS-5-enabled"
 				},
 				{
 					"id": "RSS-6",
-					"name": "RSS-6"
+					"name": "RSS-6",
+					"when": "RSS-6-enabled"
 				},
 				{
 					"id": "RSS-7",
-					"name": "RSS-7"
+					"name": "RSS-7",
+					"when": "RSS-7-enabled"
 				},
 				{
 					"id": "RSS-8",
-					"name": "RSS-8"
+					"name": "RSS-8",
+					"when": "RSS-8-enabled"
 				},
 				{
 					"id": "RSS-9",
-					"name": "RSS-9"
+					"name": "RSS-9",
+					"when": "RSS-9-enabled"
 				}
 			]
 		},
@@ -145,7 +155,7 @@
 		"doc": "typedoc"
 	},
 	"devDependencies": {
-		"typescript": "^3.3.1",
+		"typescript": "^3.7.2",
 		"vscode": "^1.1.28",
 		"tslint": "^5.12.1",
 		"@types/node": "^10.12.21",
