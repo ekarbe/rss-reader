@@ -1,25 +1,35 @@
 import * as vscode from 'vscode';
 import * as reader from './reader';
-import { IFeedConfig } from './extension';
+import { IEntry, IFeedConfig } from './interface';
 
+/**
+ * Feed provider for the treeview
+ */
 export class RSSProvider implements vscode.TreeDataProvider<any> {
     private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
     public title: string | undefined;
     public url: string | undefined;
+    public id: number | undefined;
 
     constructor(feedConfig: IFeedConfig) {
         this.title = feedConfig.title;
         this.url = feedConfig.url;
-        vscode.commands.executeCommand('setContext', `RSS-${feedConfig.id}-enabled`, true);
+        this.id = feedConfig.id;
+        vscode.commands.executeCommand('setContext', `RSS-${this.id}-enabled`, true);
     }
 
     refresh(): void {
         this._onDidChangeTreeData.fire();
     }
 
-    getTreeItem(element: reader.IEntry): vscode.TreeItem {
+    /**
+     * Adds treeitems to the treeview with `RSSReader.Open` command to open the link
+     * 
+     * @param element 
+     */
+    getTreeItem(element: IEntry): vscode.TreeItem {
         return new Article(element.title, vscode.TreeItemCollapsibleState.None, {
             command: 'RSSReader.Open',
             title: 'Open link',
@@ -27,12 +37,21 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
         });
     }
 
-    getChildren(element?: any): Promise<Array<reader.IEntry>> {
+    /**
+     * Requests the configured feed for this objects view
+     * 
+     * @param element 
+     */
+    getChildren(element?: any): Promise<Array<IEntry>> {
         return new Promise<any>((resolve, reject) => {
             if (this.url) {
                 reader.XML(this.url)
                     .then(response => {
                         resolve(response.entries);
+                    })
+                    .catch(error => {
+                        vscode.commands.executeCommand('setContext', `RSS-${this.id}-enabled`, false);
+                        reject(error + " Thrown in feed - " + this.title);
                     });
             }
         });
@@ -40,6 +59,9 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
     }
 }
 
+/**
+ * Consolidated feed provider for the treeview
+ */
 export class RSSCProvider implements vscode.TreeDataProvider<any> {
     private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
@@ -55,7 +77,12 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
         this._onDidChangeTreeData.fire();
     }
 
-    getTreeItem(element: reader.IEntry): vscode.TreeItem {
+    /**
+     * Adds treeitems to the treeview with `RSSReader.Open` command to open the link
+     * 
+     * @param element 
+     */
+    getTreeItem(element: IEntry): vscode.TreeItem {
         return new Article(element.title, vscode.TreeItemCollapsibleState.None, {
             command: 'RSSReader.Open',
             title: '',
@@ -64,40 +91,54 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
         );
     }
 
-    getChildren(element?: any): Promise<Array<reader.IEntry>> {
-        return new Promise<any>((resolve, reject) => {
-            if (element) {
-                resolve([new Article(element.title, vscode.TreeItemCollapsibleState.None, {
-                    command: 'RSSReader.Open',
-                    title: '',
-                    arguments: [element.link]
-                })]);
-            } else if (this.feeds) {
+    /**
+     * Requests all feeds, concats them and sorts them by date.
+     * Returns one big list of feed items. 
+     * 
+     * @param element 
+     */
+    getChildren(element?: any): Promise<Array<IEntry>> {
+        return new Promise<any>(async (resolve, reject) => {
+            if (this.feeds) {
                 let promises: Array<Promise<any>> = [];
+                // get all feeds from config object
                 for (let i = 0; i < this.feeds.length; i++) {
                     promises.push(reader.XML(this.feeds[i].url));
                 }
-                let entries: Array<reader.IEntry> = [];
-                Promise.all(promises)
-                    .then(responses => {
-                        for (let i = 0; i < responses.length; i++) {
-                            entries = [...entries, ...responses[i].entries];
-                        }
-                        entries.sort(function (a, b) {
-                            if (a.date && b.date) {
-                                return b.date.getTime() - a.date.getTime();
-                            } else {
-                                return 0;
-                            }
-                        });
-                        resolve(entries);
-                    });
+                let entries: Array<IEntry> = [];
+                // map promises to find faulty ones
+                let results = await Promise.all(promises.map(p => p.catch(e => e)));
+                // remove error responses
+                let validResults = results.filter(result => !(typeof (result) !== "object"));
+                // go through all feeds and concat them
+                for (let i = 0; i < validResults.length; i++) {
+                    if (validResults[i]) {
+                        entries = [...entries, ...validResults[i].entries];
+                    }
+                }
+                // sort all entries by published/updated date
+                entries.sort(function (a, b) {
+                    if (a.date && b.date) {
+                        return new Date(b.date).getTime() - new Date(a.date).getTime();
+                    } else {
+                        return 0;
+                    }
+                });
+                // resolve entries if there are any
+                if (entries.length > 0) {
+                    resolve(entries);
+                } else {
+                    reject("No data");
+                }
             }
         });
 
     }
 }
 
+/**
+ * Represents the feed items in the treeview
+ */
 export class Article extends vscode.TreeItem {
     constructor(
         public readonly label: string,

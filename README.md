@@ -11,12 +11,34 @@
 
 ## Features
 
+The RSS-Reader provides you with a Treeview which can show up to 10 separated views or a consolated one with no limit.
+
+The `Feeds` setting should be formatted like:
+```
+   "RSSReader.Feeds": [
+      {
+        "title": "Lorem",
+        "url": "https://ipsum.com/rss"
+      },
+      {
+        "title": "foo",
+        "url": "https://bar.org/feed.xml"
+      }
+    ]
+```
+
+For now the `title` option has no function, because the api to change the title of a view is still unreleased.
 
 ## Requirements
 
 This extension requires Visual Studio Code 1.40.x or later and an active connection to the internet to work properly.
 
 ## Extension Settings
+
+- `RSSReader.Feeds`: Controls the feeds for the RSS-Reader.
+- `RSSReader.Consolidated`: Enable/disable consolidated mode.
+- `RSSReader.Update`: Enable/disable auto update.
+- `RSSReader.Interval`: Controls the update interval in minutes.
 
 ## Known Issues
 
@@ -30,4 +52,6 @@ This extension requires Visual Studio Code 1.40.x or later and an active connect
 
 For all releases take a look at the [Changelog](CHANGELOG.md).
 
-### Unreleased
+### 1.0.0
+
+- Initial release

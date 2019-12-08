@@ -2,7 +2,7 @@
 	"name": "rss-reader",
 	"displayName": "RSS-Reader",
 	"description": "RSS feed widget",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "ekarbe",
 	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
 	"license": "MIT",
@@ -36,7 +36,7 @@
 		"*"
 	],
 	"icon": "resources/rss-reader-icon.png",
-	"main": "./out/extension.js",
+	"main": "./dist/extension.js",
 	"contributes": {
 		"configuration": [
 			{
@@ -50,12 +50,22 @@
 								"url": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US%3Aen&x=1571747254.2933"
 							}
 						],
-						"description": "Sets the feeds"
+						"description": "Controls the feeds for the RSS-Reader."
 					},
 					"RSSReader.Consolidated": {
 						"type": "boolean",
 						"default": true,
-						"description": "Defines if the feeds should be consolidated into one view."
+						"description": "Enable/disable consolidated mode."
+					},
+					"RSSReader.Update": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable auto update."
+					},
+					"RSSReader.Interval": {
+						"type": "number",
+						"default": 10,
+						"description": "Controls the update interval in minutes."
 					}
 				}
 			}
@@ -147,7 +157,9 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "typedoc && npm run compile",
+		"vscode:prepublish": "typedoc && webpack --mode production",
+		"webpack": "webpack --mode development",
+		"webpack-dev": "webpack --mode development --watch",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
@@ -155,14 +167,19 @@
 		"doc": "typedoc"
 	},
 	"devDependencies": {
+		"@types/he": "^1.1.0",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^10.12.21",
+		"ts-loader": "^6.2.1",
+		"tslint": "^5.12.1",
 		"typescript": "^3.7.2",
 		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
-		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10"
 	},
 	"dependencies": {
 		"fast-xml-parser": "^3.15.0",
+		"he": "^1.2.0",
 		"typed-rest-client": "^1.5.0"
 	}
 }

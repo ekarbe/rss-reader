@@ -109,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HttpClient</span><span class="tsd-signature-symbol"> =&nbsp;new hm.HttpClient(&#x27;XML&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L4">reader.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L6">reader.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -126,13 +126,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L17">reader.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L13">reader.ts:13</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Requests and parses the XML feed</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>URL: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ifeed.html" class="tsd-signature-type">IFeed</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -149,9 +156,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L10">extension.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L11">extension.ts:11</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Activates the extension</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -159,6 +171,8 @@
 								</li>
 								<li>
 									<h5>context: <span class="tsd-signature-type">ExtensionContext</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -175,7 +189,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L37">extension.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/extension.ts#L69">extension.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -186,25 +200,29 @@
 					<a name="parsexml" class="tsd-anchor"></a>
 					<h3>parseXML</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">parseXML<span class="tsd-signature-symbol">(</span>XML<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/ifeed.html" class="tsd-signature-type">IFeed</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">parseXML<span class="tsd-signature-symbol">(</span>XML<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ifeed.html" class="tsd-signature-type">IFeed</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L32">reader.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/reader.ts#L42">reader.ts:42</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Parses all kinds of feeds to return a uniform object</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>XML: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="interfaces/ifeed.html" class="tsd-signature-type">IFeed</a>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">undefined</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/ifeed.html" class="tsd-signature-type">IFeed</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
