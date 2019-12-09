@@ -12,3 +12,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Fixed issue that refresh buttons were written into other extensions
 - Fixed refresh button for unconsolidated mode
+
+- Hotfix for consolidated refresh

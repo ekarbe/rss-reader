@@ -14,7 +14,7 @@ export function activate(this: any, context: vscode.ExtensionContext) {
 		// check setting if consolidated feed or divided
 		if (vscode.workspace.getConfiguration('RSSReader').get('Consolidated')) {
 			let RSSProvider = new RSSCProvider(feeds);
-			vscode.commands.registerCommand('RSSReader.Refresh', () => RSSProvider.refresh());
+			vscode.commands.registerCommand('RSSReader.Refresh-0', () => RSSProvider.refresh());
 			vscode.window.registerTreeDataProvider('RSS-0', RSSProvider);
 
 			// set auto update
