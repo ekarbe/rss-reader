@@ -2,7 +2,7 @@
 	"name": "rss-reader",
 	"displayName": "RSS-Reader",
 	"description": "RSS feed widget",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "ekarbe",
 	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
 	"license": "MIT",
