@@ -151,7 +151,8 @@
 			"view/title": [
 				{
 					"command": "RSSReader.Refresh",
-					"group": "navigation"
+					"group": "navigation",
+					"when": "view =~ /RSS-[0-9]/"
 				}
 			]
 		}
