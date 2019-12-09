@@ -76,7 +76,79 @@
 				"title": "Open links from RSS Reader"
 			},
 			{
-				"command": "RSSReader.Refresh",
+				"command": "RSSReader.Refresh-0",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-1",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-2",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-3",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-4",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-5",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-6",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-7",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-8",
+				"title": "Refresh the RSS feed",
+				"icon": {
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "RSSReader.Refresh-9",
 				"title": "Refresh the RSS feed",
 				"icon": {
 					"light": "resources/icons/light/refresh.svg",
@@ -150,9 +222,64 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "RSSReader.Refresh",
+					"command": "RSSReader.Refresh-0",
 					"group": "navigation",
-					"when": "view =~ /RSS-[0-9]/"
+					"when": "view == RSS-0"
+				},
+				{
+					"command": "RSSReader.Refresh-1",
+					"group": "navigation",
+					"when": "view == RSS-1"
+				},
+				{
+					"command": "RSSReader.Refresh-2",
+					"group": "navigation",
+					"when": "view == RSS-2"
+				},
+				{
+					"command": "RSSReader.Refresh-3",
+					"group": "navigation",
+					"when": "view == RSS-3"
+				},
+				{
+					"command": "RSSReader.Refresh-4",
+					"group": "navigation",
+					"when": "view == RSS-4"
+				},
+				{
+					"command": "RSSReader.Refresh-5",
+					"group": "navigation",
+					"when": "view == RSS-5"
+				},
+				{
+					"command": "RSSReader.Refresh-6",
+					"group": "navigation",
+					"when": "view == RSS-6"
+				},
+				{
+					"command": "RSSReader.Refresh-6",
+					"group": "navigation",
+					"when": "view == RSS-6"
+				},
+				{
+					"command": "RSSReader.Refresh-7",
+					"group": "navigation",
+					"when": "view == RSS-7"
+				},
+				{
+					"command": "RSSReader.Refresh-7",
+					"group": "navigation",
+					"when": "view == RSS-7"
+				},
+				{
+					"command": "RSSReader.Refresh-8",
+					"group": "navigation",
+					"when": "view == RSS-8"
+				},
+				{
+					"command": "RSSReader.Refresh-9",
+					"group": "navigation",
+					"when": "view == RSS-9"
 				}
 			]
 		}
