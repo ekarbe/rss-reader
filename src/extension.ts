@@ -27,10 +27,7 @@ export function activate(this: any, context: vscode.ExtensionContext) {
 			for (let i = 0; i < feeds.length; i++) {
 				feeds[i].id = i;
 				this['RSSProvider' + i] = new RSSProvider(feeds[i]);
-
-				// TODO: Fix this
-				//vscode.commands.registerCommand('RSSReader.Refresh', () => this['RSSProvider' + i].refresh());
-
+				vscode.commands.registerCommand(`RSSReader.Refresh-${i}`, () => this['RSSProvider' + i].refresh());
 				this['RSSView' + i] = vscode.window.createTreeView('RSS-' + i, { treeDataProvider: this['RSSProvider' + i] });
 
 				// waiting for proposed api to hit stable
