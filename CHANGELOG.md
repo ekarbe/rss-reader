@@ -14,3 +14,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Fixed refresh button for unconsolidated mode
 
 - Hotfix for consolidated refresh
+
+## [1.1.0]
+
+- Added identifier to consolidated view
+- Removed commands from commandpalette

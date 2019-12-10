@@ -1,22 +1,22 @@
 import * as hm from 'typed-rest-client/HttpClient';
 import * as parser from 'fast-xml-parser';
 import * as he from 'he';
-import { IFeed, IEntry } from './interface';
+import { IFeed, IEntry, IFeedConfig } from './interface';
 
 const http: hm.HttpClient = new hm.HttpClient('XML');
 
 /**
  * Requests and parses the XML feed
  * 
- * @param URL 
+ * @param config 
  */
-export async function XML(URL: string): Promise<IFeed> {
+export async function XML(config: IFeedConfig): Promise<IFeed> {
     return new Promise<any>((resolve, reject) => {
-        http.get(URL)
+        http.get(config.url)
             .then(res => {
                 res.readBody()
                     .then(body => {
-                        parseXML(body)
+                        parseXML(body, config)
                             .then(response => {
                                 resolve(response);
                             })
@@ -39,7 +39,7 @@ export async function XML(URL: string): Promise<IFeed> {
  * 
  * @param XML 
  */
-function parseXML(XML: string): Promise<IFeed> {
+function parseXML(XML: string, config: IFeedConfig): Promise<IFeed> {
     return new Promise<any>((resolve, reject) => {
         let JSON = parser.parse(XML, {
             attributeNamePrefix: "",
@@ -78,6 +78,7 @@ function parseXML(XML: string): Promise<IFeed> {
             if (items) {
                 items.forEach((object: any) => {
                     let entry: IEntry = {
+                        identifier: config.identifier,
                         title: ""
                     };
                     if (object.title && typeof (object.title) !== "object") {

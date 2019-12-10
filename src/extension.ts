@@ -24,7 +24,8 @@ export function activate(this: any, context: vscode.ExtensionContext) {
 				}, <number>vscode.workspace.getConfiguration('RSSReader').get('Interval') * 60000);
 			}
 		} else {
-			for (let i = 0; i < feeds.length; i++) {
+			let max = feeds.length > 10 ? 10 : feeds.length;
+			for (let i = 0; i < max; i++) {
 				feeds[i].id = i;
 				this['RSSProvider' + i] = new RSSProvider(feeds[i]);
 				vscode.commands.registerCommand(`RSSReader.Refresh-${i}`, () => this['RSSProvider' + i].refresh());

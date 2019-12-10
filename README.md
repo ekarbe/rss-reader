@@ -17,17 +17,19 @@ The `Feeds` setting should be formatted like:
 ```
    "RSSReader.Feeds": [
       {
+        "identifier": "L",
         "title": "Lorem",
         "url": "https://ipsum.com/rss"
       },
       {
+        "identifier": "F",
         "title": "foo",
         "url": "https://bar.org/feed.xml"
       }
     ]
 ```
 
-For now the `title` option has no function, because the api to change the title of a view is still unreleased.
+The `identifier` should be a maxium of 3 characters. Otherwise it may look bad. For now the `title` option has no function, because the api to change the title of a view is still unreleased.
 
 ## Requirements
 
@@ -39,6 +41,7 @@ This extension requires Visual Studio Code 1.40.x or later and an active connect
 - `RSSReader.Consolidated`: Enable/disable consolidated mode.
 - `RSSReader.Update`: Enable/disable auto update.
 - `RSSReader.Interval`: Controls the update interval in minutes.
+- `RSSReader.Identifiert`: Enable/disable the identifier in the consolidated mode.
 
 ## Known Issues
 
@@ -55,3 +58,7 @@ For all releases take a look at the [Changelog](CHANGELOG.md).
 ### 1.0.0
 
 - Initial release
+
+### 1.1.0
+
+- Added identifier to consolidated view

@@ -99,8 +99,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="article.html#collapsablestate" class="tsd-kind-icon">collapsable<wbr>State</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#collapsiblestate" class="tsd-kind-icon">collapsible<wbr>State</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="article.html#collapsiblestate" class="tsd-kind-icon">collapsible<wbr>State</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="article.html#command" class="tsd-kind-icon">command</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#contextvalue" class="tsd-kind-icon">context<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="article.html#description" class="tsd-kind-icon">description</a></li>
@@ -120,14 +119,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Article<span class="tsd-signature-symbol">(</span>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, collapsableState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItemCollapsibleState</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="article.html" class="tsd-signature-type">Article</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Article<span class="tsd-signature-symbol">(</span>label<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, collapsibleState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItemCollapsibleState</span>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="article.html" class="tsd-signature-type">Article</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides TreeItem.__constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L142">provider.ts:142</a></li>
+									<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L155">provider.ts:155</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -136,7 +135,7 @@
 									<h5>label: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>collapsableState: <span class="tsd-signature-type">TreeItemCollapsibleState</span></h5>
+									<h5>collapsibleState: <span class="tsd-signature-type">TreeItemCollapsibleState</span></h5>
 								</li>
 								<li>
 									<h5>command: <span class="tsd-signature-type">Command</span></h5>
@@ -149,31 +148,16 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="collapsablestate" class="tsd-anchor"></a>
-					<h3>collapsable<wbr>State</h3>
-					<div class="tsd-signature tsd-kind-icon">collapsable<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TreeItemCollapsibleState</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L145">provider.ts:145</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="collapsiblestate" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> collapsible<wbr>State</h3>
+					<h3>collapsible<wbr>State</h3>
 					<div class="tsd-signature tsd-kind-icon">collapsible<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TreeItemCollapsibleState</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from TreeItem.collapsibleState</p>
+						<p>Overrides TreeItem.collapsibleState</p>
 						<ul>
-							<li>Defined in /home/ekarbe/Projects/rss-reader/node_modules/vscode/vscode.d.ts:7360</li>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L158">provider.ts:158</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p><a href="#TreeItemCollapsibleState">TreeItemCollapsibleState</a> of the tree item.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 					<a name="command" class="tsd-anchor"></a>
@@ -182,7 +166,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides TreeItem.command</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L146">provider.ts:146</a></li>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L159">provider.ts:159</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +257,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides TreeItem.label</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L144">provider.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/ekarbe/rss-reader/blob/master/src/provider.ts#L157">provider.ts:157</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -331,10 +315,7 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="article.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="article.html#collapsablestate" class="tsd-kind-icon">collapsable<wbr>State</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
 								<a href="article.html#collapsiblestate" class="tsd-kind-icon">collapsible<wbr>State</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">

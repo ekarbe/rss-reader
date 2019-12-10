@@ -2,7 +2,7 @@
 	"name": "rss-reader",
 	"displayName": "RSS-Reader",
 	"description": "RSS feed widget",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"publisher": "ekarbe",
 	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
 	"license": "MIT",
@@ -46,11 +46,12 @@
 						"type": "array",
 						"default": [
 							{
+								"identifier": "GN",
 								"title": "Google News",
 								"url": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US%3Aen&x=1571747254.2933"
 							}
 						],
-						"description": "Controls the feeds for the RSS-Reader."
+						"description": "Controls the feeds for the RSS-Reader. The identifier should be 3 characters maximum."
 					},
 					"RSSReader.Consolidated": {
 						"type": "boolean",
@@ -66,6 +67,11 @@
 						"type": "number",
 						"default": 10,
 						"description": "Controls the update interval in minutes."
+					},
+					"RSSReader.Identifier": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable the identifier in the consolidated mode."
 					}
 				}
 			}
@@ -220,6 +226,52 @@
 			]
 		},
 		"menus": {
+			"commandPalette": [
+				{
+					"command": "RSSReader.Open",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-0",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-1",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-2",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-3",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-4",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-5",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-6",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-7",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-8",
+					"when": "false"
+				},
+				{
+					"command": "RSSReader.Refresh-9",
+					"when": "false"
+				}
+			],
 			"view/title": [
 				{
 					"command": "RSSReader.Refresh-0",

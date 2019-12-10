@@ -9,15 +9,12 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
     private _onDidChangeTreeData: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
     readonly onDidChangeTreeData: vscode.Event<any> = this._onDidChangeTreeData.event;
 
-    public title: string | undefined;
-    public url: string | undefined;
-    public id: number | undefined;
+    public config: IFeedConfig;
 
     constructor(feedConfig: IFeedConfig) {
-        this.title = feedConfig.title;
-        this.url = feedConfig.url;
-        this.id = feedConfig.id;
-        vscode.commands.executeCommand('setContext', `RSS-${this.id}-enabled`, true);
+        this.config = feedConfig;
+        console.log(this.config);
+        vscode.commands.executeCommand('setContext', `RSS-${this.config.id}-enabled`, true);
     }
 
     refresh(): void {
@@ -30,11 +27,16 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
      * @param element 
      */
     getTreeItem(element: IEntry): vscode.TreeItem {
-        return new Article(element.title, vscode.TreeItemCollapsibleState.None, {
-            command: 'RSSReader.Open',
-            title: 'Open link',
-            arguments: [element.link]
-        });
+        return {
+            label: element.title,
+            collapsibleState: vscode.TreeItemCollapsibleState.None,
+            command: {
+                command: 'RSSReader.Open',
+                title: 'Open link',
+                arguments: [element.link],
+            },
+            iconPath: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="30" width="200"><text x="0" y="15">HN</text></svg>`
+        };
     }
 
     /**
@@ -44,14 +46,14 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
      */
     getChildren(element?: any): Promise<Array<IEntry>> {
         return new Promise<any>((resolve, reject) => {
-            if (this.url) {
-                reader.XML(this.url)
+            if (this.config) {
+                reader.XML(this.config)
                     .then(response => {
                         resolve(response.entries);
                     })
                     .catch(error => {
-                        vscode.commands.executeCommand('setContext', `RSS-${this.id}-enabled`, false);
-                        reject(error + " Thrown in feed - " + this.title);
+                        vscode.commands.executeCommand('setContext', `RSS-${this.config.id}-enabled`, false);
+                        reject(error + " Thrown in feed - " + this.config.title);
                     });
             }
         });
@@ -83,12 +85,23 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
      * @param element 
      */
     getTreeItem(element: IEntry): vscode.TreeItem {
-        return new Article(element.title, vscode.TreeItemCollapsibleState.None, {
-            command: 'RSSReader.Open',
-            title: '',
-            arguments: [element.link]
+        let item: vscode.TreeItem = {
+            label: element.title,
+            collapsibleState: vscode.TreeItemCollapsibleState.None,
+            command: {
+                command: 'RSSReader.Open',
+                title: 'Open link',
+                arguments: [element.link],
+            }
+        };
+        // add identifier
+        if (vscode.workspace.getConfiguration('RSSReader').get('Identifier') && element.identifier) {
+            // hacky way to add dynamic svg icon
+            let lightIcon = vscode.Uri.parse(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='25' width='25' fill='black' style='font-family: Arial, Helvetica, sans-serif;font-size: 0.8em;'%3E%3Ctext x='0' y='15'%3E${element.identifier}%3C/text%3E%3C/svg%3E`, true);
+            let darkIcon = vscode.Uri.parse(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='25' width='25' fill='white' style='font-family: Arial, Helvetica, sans-serif;font-size: 0.8em;'%3E%3Ctext x='0' y='15'%3E${element.identifier}%3C/text%3E%3C/svg%3E`, true);
+            item.iconPath = { light: lightIcon, dark: darkIcon }
         }
-        );
+        return item;
     }
 
     /**
@@ -103,7 +116,7 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
                 let promises: Array<Promise<any>> = [];
                 // get all feeds from config object
                 for (let i = 0; i < this.feeds.length; i++) {
-                    promises.push(reader.XML(this.feeds[i].url));
+                    promises.push(reader.XML(this.feeds[i]));
                 }
                 let entries: Array<IEntry> = [];
                 // map promises to find faulty ones
@@ -142,9 +155,9 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
 export class Article extends vscode.TreeItem {
     constructor(
         public readonly label: string,
-        public readonly collapsableState: vscode.TreeItemCollapsibleState,
+        public readonly collapsibleState: vscode.TreeItemCollapsibleState,
         public readonly command: vscode.Command
     ) {
-        super(label, collapsableState);
+        super(label, collapsibleState);
     }
 }

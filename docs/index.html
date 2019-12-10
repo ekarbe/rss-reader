@@ -81,14 +81,16 @@
 				<p>The <code>Feeds</code> setting should be formatted like:</p>
 				<pre><code>   <span class="hljs-string">"RSSReader.Feeds"</span>: [
       {
+        <span class="hljs-string">"identifier"</span>: <span class="hljs-string">"L"</span>,
         <span class="hljs-string">"title"</span>: <span class="hljs-string">"Lorem"</span>,
         <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://ipsum.com/rss"</span>
       },
       {
+        <span class="hljs-string">"identifier"</span>: <span class="hljs-string">"F"</span>,
         <span class="hljs-string">"title"</span>: <span class="hljs-string">"foo"</span>,
         <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://bar.org/feed.xml"</span>
       }
-    ]</code></pre><p>For now the <code>title</code> option has no function, because the api to change the title of a view is still unreleased.</p>
+    ]</code></pre><p>The <code>identifier</code> should be a maxium of 3 characters. Otherwise it may look bad. For now the <code>title</code> option has no function, because the api to change the title of a view is still unreleased.</p>
 				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
 					<h2>Requirements</h2>
 				</a>
@@ -101,6 +103,7 @@
 					<li><code>RSSReader.Consolidated</code>: Enable/disable consolidated mode.</li>
 					<li><code>RSSReader.Update</code>: Enable/disable auto update.</li>
 					<li><code>RSSReader.Interval</code>: Controls the update interval in minutes.</li>
+					<li><code>RSSReader.Identifiert</code>: Enable/disable the identifier in the consolidated mode.</li>
 				</ul>
 				<a href="#known-issues" id="known-issues" style="color: inherit; text-decoration: none;">
 					<h2>Known Issues</h2>
@@ -123,6 +126,12 @@
 				</a>
 				<ul>
 					<li>Initial release</li>
+				</ul>
+				<a href="#110" id="110" style="color: inherit; text-decoration: none;">
+					<h3>1.1.0</h3>
+				</a>
+				<ul>
+					<li>Added identifier to consolidated view</li>
 				</ul>
 			</div>
 		</div>
