@@ -19,3 +19,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Added identifier to consolidated view
 - Removed commands from commandpalette
+
+## [1.2.0 Unreleased]
+
+- Added open in editor function
+- Added setting to set primary feed object action

@@ -8,6 +8,7 @@ export interface IEntry {
     title: string;
     link?: string;
     date?: Date;
+    content?: string;
 }
 
 export interface IFeedConfig {

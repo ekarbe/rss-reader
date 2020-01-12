@@ -1,6 +1,7 @@
 import * as hm from 'typed-rest-client/HttpClient';
 import * as parser from 'fast-xml-parser';
 import * as he from 'he';
+import * as ht from 'html-to-text';
 import { IFeed, IEntry, IFeedConfig } from './interface';
 
 const http: hm.HttpClient = new hm.HttpClient('XML');
@@ -89,6 +90,17 @@ function parseXML(XML: string, config: IFeedConfig): Promise<IFeed> {
                     }
                     if (entry.title) {
                         entry.title = he.decode(entry.title);
+                    }
+                    if (object.content) {
+                        if (object.content.text) {
+                            entry.content = ht.fromString(he.decode(object.content.text));
+                        } else {
+                            entry.content = ht.fromString(he.decode(object.content));
+                        }
+                    } else if (object["content:encoded"]) {
+                        entry.content = ht.fromString(he.decode(object["content:encoded"]));
+                    } else if (object.description) {
+                        entry.content = ht.fromString(he.decode(object.description));
                     }
                     if (object.updated) {
                         entry.date = object.updated;

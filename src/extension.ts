@@ -57,11 +57,24 @@ export function activate(this: any, context: vscode.ExtensionContext) {
 	});
 
 	// open link in browser
-	let linkOpener = vscode.commands.registerCommand('RSSReader.Open', (link) => {
-		vscode.env.openExternal(vscode.Uri.parse(link));
+	let linkOpener = vscode.commands.registerCommand('RSSReader.OpenLink', (link) => {
+		if (typeof (link) === 'object') {
+			vscode.env.openExternal(vscode.Uri.parse(link.link));
+		} else {
+			vscode.env.openExternal(vscode.Uri.parse(link));
+		}
 	});
 
-	context.subscriptions.push(linkOpener);
+	// open content in editor
+	let editorOpener = vscode.commands.registerCommand('RSSReader.OpenEditor', (feedObject) => {
+		vscode.workspace.openTextDocument({ content: feedObject.content })
+			.then(doc => vscode.window.showTextDocument(doc, { preview: true }));
+	});
+
+	context.subscriptions.push(
+		linkOpener,
+		editorOpener
+	);
 }
 
 export function deactivate() { }

@@ -13,7 +13,6 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
 
     constructor(feedConfig: IFeedConfig) {
         this.config = feedConfig;
-        console.log(this.config);
         vscode.commands.executeCommand('setContext', `RSS-${this.config.id}-enabled`, true);
     }
 
@@ -22,20 +21,29 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
     }
 
     /**
-     * Adds treeitems to the treeview with `RSSReader.Open` command to open the link
+     * Adds treeitems to the treeview with the primary command to open the link
      * 
      * @param element 
      */
     getTreeItem(element: IEntry): vscode.TreeItem {
+        let command;
+        if (vscode.workspace.getConfiguration('RSSReader').get('OpenType') === "OpenLink") {
+            command = {
+                command: 'RSSReader.OpenLink',
+                title: 'Open link',
+                arguments: [element.link],
+            }
+        } else {
+            command = {
+                command: 'RSSReader.OpenEditor',
+                title: 'Open content',
+                arguments: [element],
+            }
+        }
         return {
             label: element.title,
             collapsibleState: vscode.TreeItemCollapsibleState.None,
-            command: {
-                command: 'RSSReader.Open',
-                title: 'Open link',
-                arguments: [element.link],
-            },
-            iconPath: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="30" width="200"><text x="0" y="15">HN</text></svg>`
+            command: command
         };
     }
 
@@ -80,19 +88,29 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
     }
 
     /**
-     * Adds treeitems to the treeview with `RSSReader.Open` command to open the link
+     * Adds treeitems to the treeview with the primary command to open the link
      * 
      * @param element 
      */
     getTreeItem(element: IEntry): vscode.TreeItem {
-        let item: vscode.TreeItem = {
-            label: element.title,
-            collapsibleState: vscode.TreeItemCollapsibleState.None,
-            command: {
-                command: 'RSSReader.Open',
+        let command;
+        if (vscode.workspace.getConfiguration('RSSReader').get('OpenType') === "OpenLink") {
+            command = {
+                command: 'RSSReader.OpenLink',
                 title: 'Open link',
                 arguments: [element.link],
             }
+        } else {
+            command = {
+                command: 'RSSReader.OpenEditor',
+                title: 'Open content',
+                arguments: [element],
+            }
+        }
+        let item: vscode.TreeItem = {
+            label: element.title,
+            collapsibleState: vscode.TreeItemCollapsibleState.None,
+            command: command
         };
         // add identifier
         if (vscode.workspace.getConfiguration('RSSReader').get('Identifier') && element.identifier) {

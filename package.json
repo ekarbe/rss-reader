@@ -2,7 +2,7 @@
 	"name": "rss-reader",
 	"displayName": "RSS-Reader",
 	"description": "RSS feed widget",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"publisher": "ekarbe",
 	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
 	"license": "MIT",
@@ -72,14 +72,30 @@
 						"type": "boolean",
 						"default": true,
 						"description": "Enable/disable the identifier in the consolidated mode."
+					},
+					"RSSReader.OpenType": {
+						"type": "string",
+						"enum": [
+							"OpenLink",
+							"OpenEditor"
+						],
+						"enumDescriptions": [
+							"Open the link of the feed object.",
+							"Open the content of the feed object."
+						],
+						"description": "Controls the primary action for feed entries."
 					}
 				}
 			}
 		],
 		"commands": [
 			{
-				"command": "RSSReader.Open",
+				"command": "RSSReader.OpenLink",
 				"title": "Open links from RSS Reader"
+			},
+			{
+				"command": "RSSReader.OpenEditor",
+				"title": "Open content from RSS Reader in an editor column"
 			},
 			{
 				"command": "RSSReader.Refresh-0",
@@ -228,7 +244,7 @@
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "RSSReader.Open",
+					"command": "RSSReader.OpenLink",
 					"when": "false"
 				},
 				{
@@ -333,6 +349,16 @@
 					"group": "navigation",
 					"when": "view == RSS-9"
 				}
+			],
+			"view/item/context": [
+				{
+					"command": "RSSReader.OpenLink",
+					"when": "config.RSSReader.OpenType != OpenLink"
+				},
+				{
+					"command": "RSSReader.OpenEditor",
+					"when": "config.RSSReader.OpenType != OpenEditor"
+				}
 			]
 		}
 	},
@@ -349,17 +375,19 @@
 	"devDependencies": {
 		"@types/he": "^1.1.0",
 		"@types/mocha": "^2.2.42",
-		"@types/node": "^10.12.21",
+		"@types/node": "^10.17.13",
 		"ts-loader": "^6.2.1",
 		"tslint": "^5.12.1",
-		"typescript": "^3.7.2",
+		"typescript": "^3.7.4",
 		"vscode": "^1.1.28",
-		"webpack": "^4.41.2",
+		"webpack": "^4.41.5",
 		"webpack-cli": "^3.3.10"
 	},
 	"dependencies": {
-		"fast-xml-parser": "^3.15.0",
+		"@types/html-to-text": "^1.4.31",
+		"fast-xml-parser": "^3.16.0",
 		"he": "^1.2.0",
-		"typed-rest-client": "^1.5.0"
+		"html-to-text": "^5.1.1",
+		"typed-rest-client": "^1.7.1"
 	}
 }
