@@ -1,5 +1,4 @@
 export interface IFeed {
-    title?: string;
     entries?: Array<IEntry>;
 }
 

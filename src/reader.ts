@@ -63,13 +63,10 @@ function parseXML(XML: string, config: IFeedConfig): Promise<IFeed> {
             feed = JSON.channel;
         } else if (JSON.feed) {
             feed = JSON.feed;
+        } else if (JSON["rdf:RDF"]) {
+            feed = JSON["rdf:RDF"];
         }
         if (feed) {
-            if (feed.title && typeof (feed.title) !== "object") {
-                feedObject.title = feed.title;
-            } else if (feed.title.text) {
-                feedObject.title = feed.title.text;
-            }
             let items = undefined;
             if (feed.item) {
                 items = feed.item;
@@ -99,8 +96,10 @@ function parseXML(XML: string, config: IFeedConfig): Promise<IFeed> {
                         }
                     } else if (object["content:encoded"]) {
                         entry.content = ht.fromString(he.decode(object["content:encoded"]));
-                    } else if (object.description) {
+                    } else if (object.description && typeof (object.description) !== "object") {
                         entry.content = ht.fromString(he.decode(object.description));
+                    } else if (object.description.text) {
+                        entry.content = ht.fromString(he.decode(object.description.text));
                     }
                     if (object.updated) {
                         entry.date = object.updated;
