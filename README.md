@@ -41,7 +41,8 @@ This extension requires Visual Studio Code 1.40.x or later and an active connect
 - `RSSReader.Consolidated`: Enable/disable consolidated mode.
 - `RSSReader.Update`: Enable/disable auto update.
 - `RSSReader.Interval`: Controls the update interval in minutes.
-- `RSSReader.Identifiert`: Enable/disable the identifier in the consolidated mode.
+- `RSSReader.Identifier`: Enable/disable the identifier in the consolidated mode.
+- `RSSReader.OpenType`: Controls the primary action for feed entries.
 
 ## Known Issues
 

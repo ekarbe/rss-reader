@@ -32,13 +32,13 @@ export class RSSProvider implements vscode.TreeDataProvider<any> {
                 command: 'RSSReader.OpenLink',
                 title: 'Open link',
                 arguments: [element.link],
-            }
+            };
         } else {
             command = {
                 command: 'RSSReader.OpenEditor',
                 title: 'Open content',
                 arguments: [element],
-            }
+            };
         }
         return {
             label: element.title,
@@ -99,13 +99,13 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
                 command: 'RSSReader.OpenLink',
                 title: 'Open link',
                 arguments: [element.link],
-            }
+            };
         } else {
             command = {
                 command: 'RSSReader.OpenEditor',
                 title: 'Open content',
                 arguments: [element],
-            }
+            };
         }
         let item: vscode.TreeItem = {
             label: element.title,
@@ -117,7 +117,7 @@ export class RSSCProvider implements vscode.TreeDataProvider<any> {
             // hacky way to add dynamic svg icon
             let lightIcon = vscode.Uri.parse(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='25' width='25' fill='black' style='font-family: Arial, Helvetica, sans-serif;font-size: 0.8em;'%3E%3Ctext x='0' y='15'%3E${element.identifier}%3C/text%3E%3C/svg%3E`, true);
             let darkIcon = vscode.Uri.parse(`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='25' width='25' fill='white' style='font-family: Arial, Helvetica, sans-serif;font-size: 0.8em;'%3E%3Ctext x='0' y='15'%3E${element.identifier}%3C/text%3E%3C/svg%3E`, true);
-            item.iconPath = { light: lightIcon, dark: darkIcon }
+            item.iconPath = { light: lightIcon, dark: darkIcon };
         }
         return item;
     }

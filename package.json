@@ -46,9 +46,9 @@
 						"type": "array",
 						"default": [
 							{
-								"identifier": "GN",
-								"title": "Google News",
-								"url": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US%3Aen&x=1571747254.2933"
+								"identifier": "EK",
+								"title": "EK Blog",
+								"url": "https://0x45696b65.dev/feed.xml"
 							}
 						],
 						"description": "Controls the feeds for the RSS-Reader. The identifier should be 3 characters maximum."
