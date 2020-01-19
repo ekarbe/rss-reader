@@ -64,6 +64,6 @@ For all releases take a look at the [Changelog](CHANGELOG.md).
 
 - Added identifier to consolidated view
 
-### 1.2.0 [Unreleased]
+### 1.2.0
 
 - Added open in editor function
