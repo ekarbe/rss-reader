@@ -2,7 +2,7 @@
 	"name": "rss-reader",
 	"displayName": "RSS-Reader",
 	"description": "RSS feed widget",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"publisher": "ekarbe",
 	"author": "Eike Christian Karbe <eichkarbe@yahoo.de>",
 	"license": "MIT",
@@ -353,11 +353,11 @@
 			"view/item/context": [
 				{
 					"command": "RSSReader.OpenLink",
-					"when": "config.RSSReader.OpenType != OpenLink"
+					"when": "view =~ /RSS/ && config.RSSReader.OpenType != OpenLink"
 				},
 				{
 					"command": "RSSReader.OpenEditor",
-					"when": "config.RSSReader.OpenType != OpenEditor"
+					"when": "view =~ /RSS/ && config.RSSReader.OpenType != OpenEditor"
 				}
 			]
 		}

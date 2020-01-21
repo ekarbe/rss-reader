@@ -25,3 +25,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added open in editor function
 - Added setting to set primary feed object action
 - Added support for RDF schema
+
+## [1.2.1]
+
+- Removed context entries from fother extensions
